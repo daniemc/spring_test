@@ -61,5 +61,11 @@ public class Product implements Serializable{
     public String getType() {
         return type;
     }
+
+    // se crea el toString del modelo para retornar el producto cuando se solicita
+    @Override
+    public String toString() {
+        return "Employee [id=" + id + ", name=" + name + ", description=" + description + ", qty=" + qty + ", price=" + price + ", type=" + type + "]";
+    }
 }
  

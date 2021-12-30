@@ -1,5 +1,8 @@
 package com.example.carrito.controllers;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.example.carrito.domain.DomainId;
 import com.example.carrito.domain.Utils;
 import com.example.carrito.domain.product.ProductType;
@@ -7,6 +10,10 @@ import com.example.carrito.models.Product;
 import com.example.carrito.repositories.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +55,30 @@ public class ProductController {
    
             productRepository.save(product);
 
+            // TODO: retornar objeto creado y estatus de la peticion
             return "Se guardo!";
+    }
+
+    // obtener todos los productos
+    @GetMapping
+    public List<Product> getProducts() {
+        return productRepository.findAll();
+    }
+
+    // obtener un producto por id
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProduct(@PathVariable(value = "id") String id) {
+
+        // se utiliza el tipo opcional porque la busqueda puede o no retornar un valor
+        Optional<Product> product = productRepository.findById(id);
+        
+        //Aqui se valida si la busqueda retornno o no un valor
+        if (product.isPresent()) {
+            return new ResponseEntity<>(product.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
     }
 
     
