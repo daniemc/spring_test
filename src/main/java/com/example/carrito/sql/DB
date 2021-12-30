@@ -1,1 +1,2 @@
-CREATE TABLE public.product ( id serial PRIMARY KEY, name varchar NULL, description varchar NULL, "type" varchar NULL, qty integer NULL, price decimal NULL);
+DROP TABLE public.product;
+CREATE TABLE public.product ( id varchar PRIMARY KEY, name varchar NULL, description varchar NULL, "type" varchar NULL, qty integer NULL, price integer NULL);
