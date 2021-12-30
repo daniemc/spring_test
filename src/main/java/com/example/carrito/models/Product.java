@@ -38,6 +38,26 @@ public class Product implements Serializable{
         this.type = productType.toString();
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public void setQty(Integer qty) {
+        this.qty = qty;
+    }
+
+    public void setType(ProductType type) {
+        this.type = type.toString();
+    }
+
     public String getId() {
         return id;
     }
