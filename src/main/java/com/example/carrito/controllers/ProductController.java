@@ -35,19 +35,15 @@ public class ProductController {
     
     // Todas las peticiones de tipo POST que lleguen a la ruta 'products', van a ejecutar este metodo
     @PostMapping
-    public @ResponseBody String addNewProduct( 
-        @RequestParam String name, 
-        @RequestParam String description, 
-        @RequestParam Integer price, 
-        @RequestParam Integer qty) {
+    public @ResponseBody String addNewProduct(@RequestBody Product productForm) {
         
             DomainId productId = new DomainId();
 
             //Dado que el nombre y la descripcion son sttring simples, solo necesitan validacion
-            String productName = Utils.validateString(name);
-            String productDescription = Utils.validateString(description);   
-            Integer productQty = Utils.validateNumber(qty);
-            Integer productPrice = Utils.validateNumber(price);
+            String productName = Utils.validateString(productForm.getName());
+            String productDescription = Utils.validateString(productForm.getDescription());   
+            Integer productQty = Utils.validateNumber(productForm.getQty());
+            Integer productPrice = Utils.validateNumber(productForm.getPrice());
 
             // Se crea el typo de pructo en el dominio ya que requiere de reglas de negocio especificas
             ProductType productType = new ProductType(productPrice);           
